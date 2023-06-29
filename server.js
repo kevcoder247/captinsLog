@@ -43,10 +43,14 @@ app.get('/logs/new', (req, res) => {
 })
 
 //Create
-app.post('/logs', (req, res) => {
-  Book.create(req.body, (error, createdBook) => {
-		res.send(createdBook);
-	});
+app.post('/logs', async (req, res) => {
+  try{
+    const createdLog = await Log.create(req.body);
+    res.redirect('/logs');
+  }catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred')
+  }
 })
 //=====================================
 //            Listener
