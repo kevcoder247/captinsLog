@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Log Entry</title>
+</head>
+<body>
+  <h1>Add New Log Entry</h1>
+
+  <form action="/logs"  method="POST">
+    Title: <input type="text" name="title"><br>
+    Entry: <input type="textarea"><br>
+    Ship is Broken: <input type="checkbox" name="completed"><br>
+    <input type="submit" value="Add Entry">
+  </form>
+</body>
+</html>

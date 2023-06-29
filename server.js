@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose')
+const Log = require('./models/logs.js')
 
 //=====================================
 //        Database Connection
@@ -31,10 +32,22 @@ app.use(express.urlencoded({ extended: true }));
 //          Routes
 //=====================================
 
+//Index
+app.get('/logs', (req, res) => {
+  res.send(`<h1>Hello</h1>`)
+})
 
+//New
+app.get('/logs/new', (req, res) => {
+  res.render('new.ejs')
+})
 
-
-
+//Create
+app.post('/logs', (req, res) => {
+  Book.create(req.body, (error, createdBook) => {
+		res.send(createdBook);
+	});
+})
 //=====================================
 //            Listener
 //=====================================
