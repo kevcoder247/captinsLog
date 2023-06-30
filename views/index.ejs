@@ -14,12 +14,15 @@
     <% logs.forEach(log => { %>
       <li>
         <a href="/logs/<%=log._id; %>"><%= log.title %></a>
+
+        <form action="/logs/<%= log.id %>?_method=DELETE" method="POST">
+          <input type="submit" value="DELETE">
+        </form>
+  
+        <a href="/logs/<%=log._id%>/edit">Edit</a>
       </li>
 
-      <form action="/logs/<%= log.id %>?_method=DELETE" method="POST">
-        
-        <input type="submit" value="DELETE">
-      </form>
+     
 
    <% }) %>
   </ul>

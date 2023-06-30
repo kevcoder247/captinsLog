@@ -91,6 +91,32 @@ app.post('/logs', async (req, res) => {
   }
 })
 
+
+
+
+
+
+
+//Edit
+app.get('/logs/:id/edit', async (req, res) => {
+  try{
+    const allLogs = await Log.findById(req.params.id);
+    res.render('edit.ejs',{
+      Logs: allLogs
+    })
+  }catch (err){
+    console.log(err);
+    res.status(500).send('An error occured')
+  }
+})
+  
+
+
+
+
+
+
+
 //Show
 app.get('/logs/:id',  async(req, res) =>{
   try{
