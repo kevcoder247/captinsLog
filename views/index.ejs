@@ -13,7 +13,7 @@
   <ul>
     <% logs.forEach(log => { %>
       <li>
-        <%= log.title %>
+        <a href="/logs/<%=log._id; %>"><%= log.title %></a>
       </li>
 
    <% }) %>

@@ -47,7 +47,6 @@ app.get('/logs/seed', async (req, res) => {
   }
 })
 
-
 //Index
 app.get('/logs', (req, res) => {
   Log.find({})
@@ -76,6 +75,20 @@ app.post('/logs', async (req, res) => {
     res.status(500).send('An error occurred')
   }
 })
+
+//Show
+app.get('/logs/:id',  async(req, res) =>{
+  try{
+    const foundLog = await Log.findById(req.params.id);
+    res.render('show.ejs', {
+      logs: foundLog,
+    })
+  }catch (error){
+    console.log(error);
+    res.status(500).send('An error occured')
+  }
+})
+
 //=====================================
 //            Listener
 //=====================================
