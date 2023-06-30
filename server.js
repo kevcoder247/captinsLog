@@ -32,6 +32,21 @@ app.use(express.urlencoded({ extended: true }));
 //          Routes
 //=====================================
 
+//Seed Data============================
+app.get('/books/seed', async (req, res) => {
+  try{
+    await Log.deleteMany({});
+
+    await Log.insertMany(logSeed);
+    
+    res.redirect('/logs')
+  }catch (error) {
+      console.log(error);
+      res.status(500).send('Error seeding the database');
+  }
+})
+
+
 //Index
 app.get('/logs', (req, res) => {
   res.send(`<h1>Hello</h1>`)
