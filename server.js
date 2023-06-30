@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose')
+const methodOverride = require("method-override");
 const Log = require('./models/logs.js')
 const logSeed = require('./models/logSeed.js')
 
@@ -27,6 +28,8 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //      MIDDLEWARE & BODY PARSER
 //=====================================
 app.use(express.urlencoded({ extended: true }));
+
+app.use(methodOverride("_method"));
 
 
 //=====================================
@@ -64,6 +67,18 @@ app.get('/logs', (req, res) => {
 app.get('/logs/new', (req, res) => {
   res.render('new.ejs')
 })
+
+//Delete
+app.delete('/logs/:id', async (req, res) =>{
+  try{
+    await Log.findByIdAndRemove(req.params.id);
+    res.redirect('/logs');
+  }catch (err){
+    console.log(err);
+    res.status(500).send('An Error occurred');
+  }
+})
+
 
 //Create
 app.post('/logs', async (req, res) => {
