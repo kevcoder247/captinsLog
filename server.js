@@ -6,6 +6,7 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose')
 const Log = require('./models/logs.js')
+const logSeed = require('./models/logSeed.js')
 
 //=====================================
 //        Database Connection
@@ -33,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 //=====================================
 
 //Seed Data============================
-app.get('/books/seed', async (req, res) => {
+app.get('/logs/seed', async (req, res) => {
   try{
     await Log.deleteMany({});
 
@@ -49,7 +50,15 @@ app.get('/books/seed', async (req, res) => {
 
 //Index
 app.get('/logs', (req, res) => {
-  res.send(`<h1>Hello</h1>`)
+  Log.find({})
+  .then(allLogs => {
+    res.render('index.ejs', {
+      logs: allLogs
+    })
+  })
+  .catch(error => {
+    console.log(error)
+  })
 })
 
 //New
