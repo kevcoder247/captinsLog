@@ -31,6 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(methodOverride("_method"));
 
+//CSS
+app.use(express.static(__dirname + '/public'))
+
 
 //=====================================
 //          Routes
@@ -68,6 +71,17 @@ app.get('/logs/new', (req, res) => {
   res.render('new.ejs')
 })
 
+//update
+app.put('/logs/:id', async (req, res) => {
+  try{
+    const foundLog = await Log.findByIdAndUpdate(req.params.id, req.body, {new: true,})
+    res.redirect(`/logs/${req.params.id}`);
+  }catch(err){
+    console.log(err);
+    res.status(500).send('An error occured in our update route');
+  }
+})
+
 //Delete
 app.delete('/logs/:id', async (req, res) =>{
   try{
@@ -75,7 +89,7 @@ app.delete('/logs/:id', async (req, res) =>{
     res.redirect('/logs');
   }catch (err){
     console.log(err);
-    res.status(500).send('An Error occurred');
+    res.status(500).send('An error occured in our delete route');
   }
 })
 
@@ -87,15 +101,9 @@ app.post('/logs', async (req, res) => {
     res.redirect('/logs');
   }catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred')
+    res.status(500).send('An error occured in our create route')
   }
 })
-
-
-
-
-
-
 
 //Edit
 app.get('/logs/:id/edit', async (req, res) => {
@@ -106,17 +114,10 @@ app.get('/logs/:id/edit', async (req, res) => {
     })
   }catch (err){
     console.log(err);
-    res.status(500).send('An error occured')
+    res.status(500).send('An error occured in our edit route')
   }
 })
   
-
-
-
-
-
-
-
 //Show
 app.get('/logs/:id',  async(req, res) =>{
   try{
@@ -126,7 +127,7 @@ app.get('/logs/:id',  async(req, res) =>{
     })
   }catch (error){
     console.log(error);
-    res.status(500).send('An error occured')
+    res.status(500).send('An error occured in our show route')
   }
 })
 

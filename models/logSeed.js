@@ -1,18 +1,18 @@
 module.exports = [
   {
     title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald"
+    entry: "F. Scott Fitzgerald"
   },
   {
     title: "To Kill a Mockingbird",
-    author: "Harper Lee"
+    entry: "Harper Lee"
   },
   {
     title: "1984",
-    author: "George Orwell"
+    entry: "George Orwell"
   },
   {
     title: "Pride and Prejudice",
-    author: "Jane Austen"
+    entry: "Jane Austen"
   }
 ]
