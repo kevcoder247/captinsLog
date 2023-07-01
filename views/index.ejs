@@ -4,23 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
   <title>Logs</title>
 </head>
 <body>
 
-  <a href="/logs/new">Create New Log</a>
+  <a href="/logs/new" class="new-link">Create New Log</a>
   <h1>Logs Index</h1>
 
   <ul>
     <% logs.forEach(log => { %>
       <li>
-        <a href="/logs/<%=log._id; %>"><%= log.title %></a>
+        <a href="/logs/<%=log._id; %>" class="title"><%= log.title %></a>
 
         <form action="/logs/<%= log.id %>?_method=DELETE" method="POST">
           <input type="submit" value="DELETE">
         </form>
   
-        <a href="/logs/<%=log._id%>/edit">Edit</a>
+        <a href="/logs/<%=log._id%>/edit" class="edit-link">Edit</a>
       </li>
   <% }) %>
   </ul>
